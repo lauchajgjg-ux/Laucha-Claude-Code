@@ -307,37 +307,172 @@ packaging de envío que aguante el correo argentino.
 
 ---
 
-## Cronograma hasta San Valentín 2027
+## Ruta rápida · de acá al primer mazo vendido
 
-| Hito | Inicio | Fin | Prioridad |
-|---|---|---|---|
-| Validación con parejas reales | 2026-09-01 | 2026-09-21 | Alta |
-| Definir mecánica y niveles | 2026-09-08 | 2026-10-05 | Alta |
-| Escribir y testear las cartas v1 | 2026-09-15 | 2026-10-19 | Alta |
-| Identidad de marca | 2026-09-22 | 2026-10-19 | Alta |
-| Abrir Instagram y TikTok | 2026-10-01 | 2027-02-14 | Alta |
-| Pedir 3 presupuestos | 2026-10-01 | 2026-10-20 | Alta |
-| Diseño gráfico de cartas y caja | 2026-10-06 | 2026-11-09 | Alta |
-| Landing y lista de espera | 2026-11-01 | 2026-11-30 | Media |
-| Dummy físico y correcciones | 2026-11-10 | 2026-11-24 | Alta |
-| Preventa a la lista de espera | 2026-12-01 | 2026-12-15 | Alta |
-| Tirada de producción | 2026-12-16 | 2027-01-20 | Alta |
-| Fotos, video y ficha de producto | 2027-01-05 | 2027-01-25 | Media |
-| Lanzamiento público | 2027-01-26 | 2027-02-14 | Alta |
-| Campaña San Valentín | 2027-02-01 | 2027-02-14 | Alta |
+> Decisión tomada: lanzar lo antes posible, no esperar a San Valentín 2027.
+
+### Qué significa "lanzar ahora" en la práctica
+
+Hoy no hay cartas escritas, ni diseño, ni imprenta cotizada. Con eso, el mazo más
+rápido posible en manos de un cliente cae a **mediados de diciembre de 2026**, no en
+septiembre: la impresión sola se lleva semanas y el plazo real hay que confirmarlo con
+el proveedor antes de prometer nada.
+
+Ese calendario no hace perder nada. Diciembre es un pico real (Navidad, modo regalo) y
+deja casi dos meses de rodaje antes de San Valentín 2027, que es donde de verdad se
+escala. Lanzar en diciembre y escalar en febrero es mejor que llegar apurado a febrero
+sin haber vendido nunca.
+
+Lo que sí se puede hacer hoy mismo: **abrir Instagram y TikTok y empezar a postear**.
+Es gratis, no depende de proveedores, y es exactamente cómo creció We're Not Really
+Strangers.
+
+### Qué recortar para ir rápido
+
+- **Validación:** de 15 entrevistas a 5 charlas + test en papel con 3 parejas. Una semana, no tres.
+- **Packaging:** tuck box impresa en la v1. Caja rígida o imantada para la v2.
+- **Canto pintado:** encarece y sube el mínimo de tirada. Va en la v2.
+- **Catálogo:** un solo SKU.
+- **Cantidad de cartas:** 60-80 en vez de 110.
+- **Fotos y video:** con el celular, sin sesión de fotos.
+
+### Qué no se recorta nunca
+
+- El test en papel (una semana).
+- El dummy físico antes de aprobar la tirada.
+- La prueba de escritura en las cartas en blanco (birome, fibra y gel).
+- La preventa: es lo que define cuántos mazos imprimir.
+- La decisión de expansiones: el mazo base tiene que estar diseñado para aceptarlas desde la v1.
+
+### Sobre los ads en Meta
+
+Ver competencia pautando es buena señal, pero:
+
+- **No pautar sin stock.** Vender lo que no se tiene quema la reputación en la primera semana.
+- **No arrancar por ads.** Con margen apretado y sin prueba social, el costo de adquisición
+  se come la ganancia. Orden: orgánico → retargeting → prospección.
+- **Sí instalar el pixel** de Meta y TikTok desde el día 1 aunque no se pause, para acumular audiencia.
+- El mazo base apto se puede pautar; la expansión picante probablemente no. Otra razón
+  para que el producto que va a ads sea siempre el base.
+
+### Las 5 cosas de esta semana
+
+| Día | Tarea |
+|---|---|
+| Lunes | Abrir Instagram y TikTok con el nombre candidato y hacer el primer posteo |
+| Martes a jueves | Escribir 40 cartas de un tirón, sin editar |
+| Miércoles | Mandar la ficha técnica a 3 imprentas |
+| Viernes | Chequear nombre en INPI, dominio .com.ar y usuarios de redes |
+| Fin de semana | Imprimir esas 40 cartas y jugar. Anotar cuál aburre y cuál genera la mejor charla |
 
 ---
 
-## Decisiones abiertas
+## Línea de producto · mazo base y expansiones
 
-1. **Presupuesto** para la primera tirada (define si va a 200, 500 o 1000 mazos).
-2. **Fecha objetivo de lanzamiento** (el cronograma apunta a San Valentín 2027).
-3. ¿Ya hay nombre, logo o cuenta de Instagram? ¿Registrado en INPI?
-4. ¿El diseño gráfico es propio o tercerizado? ¿Quién escribe las cartas?
-5. **Nivel de picante** (cambia packaging, canales de venta y viabilidad de ads en Meta).
-6. ¿Solo venta online, o también locales, ferias y mayorista?
-7. ¿Solo Argentina, o también LATAM y España?
-8. ¿Ya hubo contacto con alguna imprenta?
+> Decisión tomada: mazo base para parejas, expansiones después.
+
+### Por qué el modelo es correcto
+
+- **El segundo mazo cuesta cero de adquisición.** Vender una expansión a alguien que ya
+  compró es la venta más barata que existe.
+- **Deja pautar sobre el producto limpio.** El base apto pasa los filtros de Meta; la
+  expansión picante se vende por mail e Instagram a la propia base.
+- **Sube el ticket sin subir el costo de producción.** Una expansión de 30 cartas cuesta
+  una fracción del base y se vende a la mitad de su precio.
+
+### La decisión que hay que tomar hoy, no después
+
+Si va a haber expansiones, el mazo base tiene que estar diseñado para recibirlas desde
+la v1. Cambiarlo más adelante obliga a rehacer el arte y el troquel.
+
+- **Mismo formato de carta** en toda la línea.
+- **Dorso compatible**: si el dorso de la expansión es distinto, no se pueden mezclar en
+  una partida. Es decisión de mecánica, no de estética.
+- **Numeración que no se rompa**: código por mazo (B-01 base, P-01 picante), no 1 a 80.
+- **Caja que acepte más cartas** o que se apile con la de la expansión.
+- **Reglas que funcionen con y sin expansión.**
+
+### Orden sugerido de la línea
+
+| Versión | Producto | Notas |
+|---|---|---|
+| V1 | Mazo base (apto, regalable) | 60-80 cartas, 3 niveles. El que se pautea y se regala |
+| V2 | Expansión Picante (+18) | 30-40 cartas. A la propia base por mail e IG. Packaging sellado |
+| V3 | Expansión de contexto | A distancia · Recién juntos · Aniversario · Con hijos. La que más pidan |
+| V4 | Expansión musical con QR | La más diferencial y compleja. Requiere el redirect propio funcionando |
+
+**Regla:** no lanzar una expansión hasta haber vendido la tirada del base.
+
+### Precio de la línea
+
+- **Mazo base:** referencia local $34.000-$42.000. Con producto superior, se puede parar arriba.
+- **Expansión:** alrededor de la mitad del precio del base.
+- **Combo base + expansión:** con descuento chico sobre la suma. Tiene que existir en la
+  tienda el mismo día que sale la expansión.
+
+---
+
+## Cronograma rápido · primer mazo vendido en diciembre 2026
+
+| Hito | Inicio | Fin | Nota |
+|---|---|---|---|
+| Abrir Instagram y TikTok y postear | 2026-09-01 | 2026-12-31 | Arranca hoy. Gratis y sin depender de proveedores |
+| Escribir el mazo base v1 | 2026-09-01 | 2026-09-14 | 60-80 cartas, 3 niveles. Es el cuello de botella |
+| Test en papel con 3 a 5 parejas | 2026-09-08 | 2026-09-18 | Versión comprimida: 1 semana |
+| Nombre, INPI, dominio y usuarios | 2026-09-08 | 2026-09-18 | Antes de diseñar nada |
+| Pedir 3 presupuestos | 2026-09-10 | 2026-09-24 | Misma ficha técnica. Precio a 150 / 300 / 600 |
+| Diseño gráfico de cartas y caja | 2026-09-15 | 2026-10-09 | Segunda tarea más larga |
+| Dummy físico en corrida corta | 2026-10-05 | 2026-10-19 | Barajar, escribir encima, regalar, corregir |
+| Landing y lista de espera en Tienda Nube | 2026-10-05 | 2026-10-19 | Dominio, pixels, captura de mails |
+| Fotos y video con el dummy | 2026-10-15 | 2026-10-25 | Con el dummy ya se puede filmar y vender |
+| Preventa con precio de fundador | 2026-10-20 | 2026-11-03 | Define la tirada. Meta mínima: 15 mazos |
+| Tirada corta de producción | 2026-11-04 | 2026-12-02 | 150-300 unidades según preventa |
+| Entrega de preventa y lanzamiento público | 2026-12-03 | 2026-12-15 | Primer mazo en manos de un cliente |
+| Campaña de Navidad | 2026-12-05 | 2026-12-24 | Primer pico real |
+| Reposición y San Valentín 2027 | 2027-01-05 | 2027-02-14 | Acá se escala con ads |
+
+---
+
+## Costos · 3 escenarios de tirada (a completar con presupuestos reales)
+
+| Concepto | 150 mazos | 300 mazos | 600 mazos | Nota |
+|---|---|---|---|---|
+| Impresión de cartas (por mazo) | | | | Misma ficha técnica a las 3 imprentas |
+| Caja / packaging (por mazo) | | | | Tuck box impresa en la v1 |
+| Faja, sobre y extras (por mazo) | | | | El sobre de la carta Sellado va acá |
+| Troquel (pago único) | | | | Cero si se usa troquel estándar |
+| Flete desde la imprenta | | | | Es un total: dividir por la cantidad |
+| Packaging de envío (por mazo) | | | | Que aguante el correo argentino |
+| Merma estimada (%) | | | | Preguntar qué merma aceptan por contrato |
+| **COSTO UNITARIO TOTAL** | | | | Suma de todo lo de arriba |
+| Precio de venta (PVP) | | | | Referencia local: $34.000 a $42.000 |
+| Costo como % del PVP | | | | Objetivo: 30% o menos si se va a pautar |
+| Ganancia bruta por mazo | | | | PVP menos costo unitario |
+| Inversión total de la tirada | | | | Costo unitario x cantidad, más troquel |
+| Mazos para punto de equilibrio | | | | Inversión total / ganancia bruta |
+| Mazos que faltan tras la preventa | | | | Punto de equilibrio menos preventa |
+
+---
+
+## Decisiones
+
+### Ya definido (31/08/2026)
+
+- El diseño gráfico y la escritura de las cartas las hace el fundador.
+- El producto es un mazo base para parejas, con expansiones posteriores.
+- Se lanza lo antes posible, no se espera a San Valentín 2027.
+- El presupuesto de la primera tirada está sin definir.
+
+### Lo que falta definir, en orden de urgencia
+
+1. **Presupuesto de la primera tirada.** Es lo único que bloquea el cronograma.
+2. **Formato de carta definitivo** (63×88 o 70×120 mm). Se decide una sola vez para toda la línea.
+3. **¿Las expansiones se mezclan con el base en la misma partida?** Define si el dorso
+   tiene que ser idéntico. Decisión de mecánica, antes del diseño.
+4. **Nombre de marca** (INPI, dominio .com.ar, usuarios de redes).
+5. ¿Solo Argentina, o también LATAM y España?
+6. ¿Solo venta online, o también ferias y locales?
+7. ¿Ya hubo contacto con alguna imprenta?
 
 ---
 
