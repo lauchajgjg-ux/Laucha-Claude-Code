@@ -1,12 +1,14 @@
 # De a Dos — tienda Shopify
 
-Estado al 14/09/2026. **Nada está publicado.** Todo vive en un tema duplicado.
+Estado al 14/09/2026. **El tema ya está publicado.**
 
 - Tienda: `vigewd-ny.myshopify.com` (plan **trial** — hay que pasar a un plan pago antes de poder vender)
-- Tema publicado: **Dawn** (intacto, no lo toqué — Shopify bloquea escrituras sobre el tema vivo)
-- Tema de trabajo: **"De a Dos — v1 (borrador)"**, id `189767254318`, estado *unpublished*
+- Tema en vivo: **"De a Dos — v1 (borrador)"**, id `189767254318` — el nombre dice "borrador" pero es el principal. Conviene renombrarlo.
+- Tema de trabajo actual: **"De a Dos — v2 (envíos corregidos)"**, id `189779214638`, sin publicar
+- Dawn original: id `189726261550`, sin publicar (queda como respaldo)
 
-Para verlo: Shopify admin → Tienda online → Temas → "De a Dos — v1 (borrador)" → **Vista previa**.
+Shopify bloquea escrituras sobre el tema vivo, así que cada tanda de cambios va a un
+duplicado nuevo que después se publica a mano desde el admin.
 
 ---
 
@@ -111,22 +113,37 @@ El cross-sell y las cuotas están hechos con bloques `custom_liquid` de Dawn: no
 
 ---
 
-## Cambios en datos de la tienda (afectan también al tema publicado)
+## Cambios en datos de la tienda
 
 - **Combo**: corregí un error de cuentas. Decía *"Sueltos suman $77.800"*; 39.900 + 39.990
   = **$79.890**. Puse el precio de comparación en $79.890, así el ahorro real ($14.990)
   se muestra solo.
 - **SEO**: títulos y meta descripciones en los tres productos (antes estaban vacíos).
+- **Página "Envíos y cambios"**: estaba publicada con el borrador adentro
+  (*"Borrador para revisar…"*) y seis corchetes sin completar. Reescrita con los datos
+  reales: $5.555 fijos a todo el país, despacho de 3 a 6 días hábiles, entrega en ~2 días,
+  total de 5 a 8 hábiles, contacto `lautarojgjg@gmail.com`. También decía que el costo
+  "se calcula según tu código postal", lo cual era falso: la tarifa es plana.
+
+## Envíos — datos reales (si cambiás uno, cambialos en los tres lados)
+
+Tarifa: **$5.555 fijos** a todo el país · Despacho **3 a 6 días hábiles** · Entrega **~2 días**.
+
+Estos números están en: (1) la tarifa del perfil de envío en Shopify, (2) la página
+*Envíos y cambios*, y (3) la ficha de producto (tira de confianza y FAQ). No hay una
+única fuente: si tocás la tarifa, actualizá los tres.
+
+**Pendiente de decisión:** en "Cambios" (30 días) no está dicho quién paga el envío de
+devolución. En el arrepentimiento de 10 días sí, y corre por tu cuenta como marca la ley.
+Para el cambio voluntario hay que definirlo antes de que aparezca el primer reclamo.
 
 ---
 
 ## Qué falta
 
-1. **Contenido de las páginas** — la navegación ya está bien (menú en español, colección
-   `los-mazos` con los 3 productos, y las páginas *Cómo se juega*, *Qué es De a Dos*,
-   *Preguntas frecuentes*, *Envíos y cambios* y *Contacto* existen y están publicadas).
-   No revisé qué dice adentro de cada una: vale la pena chequear que el contenido esté
-   al nivel del resto y que *Envíos y cambios* diga plazos y costos reales.
+1. **Página de Contacto** — es la única sin contenido propio. Las demás
+   (*Cómo se juega*, *Qué es De a Dos*, *Preguntas frecuentes*, *Envíos y cambios*)
+   tienen contenido real y publicado.
 2. **Logo** — no hay. Subirlo en Tema → Configuración → Logo.
 3. **Imagen del hero** — apunta a una de las imágenes de producto. Son renders generados,
    no fotos reales del packaging. Cuando tengas fotos reales, reemplazala.
