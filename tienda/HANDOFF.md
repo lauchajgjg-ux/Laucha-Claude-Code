@@ -122,8 +122,11 @@ El cross-sell y las cuotas están hechos con bloques `custom_liquid` de Dawn: no
 
 ## Qué falta
 
-1. **Menú de navegación** — sigue en inglés (Catalog / Contact). Se edita en Shopify →
-   Tienda online → Navegación. No lo toqué porque afecta también al tema publicado.
+1. **Contenido de las páginas** — la navegación ya está bien (menú en español, colección
+   `los-mazos` con los 3 productos, y las páginas *Cómo se juega*, *Qué es De a Dos*,
+   *Preguntas frecuentes*, *Envíos y cambios* y *Contacto* existen y están publicadas).
+   No revisé qué dice adentro de cada una: vale la pena chequear que el contenido esté
+   al nivel del resto y que *Envíos y cambios* diga plazos y costos reales.
 2. **Logo** — no hay. Subirlo en Tema → Configuración → Logo.
 3. **Imagen del hero** — apunta a una de las imágenes de producto. Son renders generados,
    no fotos reales del packaging. Cuando tengas fotos reales, reemplazala.
