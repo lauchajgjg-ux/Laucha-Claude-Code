@@ -1,0 +1,79 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-insight color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+>
+  <div class="dad__wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad__eyebrow dad-reveal">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dad__h2 dad-reveal" style="margin-top: 14px;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="dad-insight__grid">
+        {%- for block in section.blocks -%}
+          <p class="dad-insight__item dad-reveal" {{ block.shopify_attributes }}>
+            {{- block.settings.text -}}
+          </p>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.turn != blank -%}
+      <p class="dad-insight__turn dad-reveal">{{ section.settings.turn }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Insight",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Momentos reconocibles, sin dramatizar la relación. Cerrá con el giro que reencuadra la situación."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Suena conocido" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>No es que no tengan nada que decirse. Es que ya saben cómo termina la conversación.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "turn",
+      "label": "El giro",
+      "default": "<p>Falta la excusa, no las ganas.</p>"
+    },
+    { "type": "color", "id": "accent", "label": "Color de acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Momento",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Tres viernes seguidos con la misma serie de fondo.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DAD · Insight",
+      "blocks": [
+        { "type": "item", "settings": { "text": "<p>Es domingo, tienen la tarde libre y no se les ocurre nada.</p>" } },
+        { "type": "item", "settings": { "text": "<p>Cenan y la charla se va sola al trabajo y a la plata.</p>" } },
+        { "type": "item", "settings": { "text": "<p>Están a distancia y la videollamada ya es un parte de novedades.</p>" } },
+        { "type": "item", "settings": { "text": "<p>Se mudaron juntos y ahora hablan más de la casa que de ustedes.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

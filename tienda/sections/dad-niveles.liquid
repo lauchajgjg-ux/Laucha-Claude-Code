@@ -1,0 +1,111 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-niveles color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+  id="dad-niveles"
+>
+  <div class="dad__wrap">
+    <div class="dad-niveles__head dad-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dad__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dad__h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="dad__lead">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="dad-niveles__list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign total = section.blocks.size
+          assign step = forloop.index | times: 100 | divided_by: total
+          if step < 18
+            assign step = 18
+          endif
+        -%}
+        <div class="dad-nivel dad-reveal" {{ block.shopify_attributes }}>
+          <span class="dad-nivel__num" aria-hidden="true">{{ block.settings.numeral | escape }}</span>
+          <div class="dad-nivel__body">
+            <h3 class="dad__h3 dad-nivel__name">{{ block.settings.name | escape }}</h3>
+            {%- if block.settings.desc != blank -%}
+              <p class="dad-nivel__desc">{{ block.settings.desc | escape }}</p>
+            {%- endif -%}
+          </div>
+          <div
+            class="dad-nivel__meter"
+            role="img"
+            aria-label="Intensidad {{ forloop.index }} de {{ total }}"
+          >
+            <span style="width: {{ step }}%;"></span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="dad__body dad-reveal" style="margin-top: 26px;">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Niveles",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "La progresión visible es el activo del producto: es lo que hace que no sea una pila de preguntas. No la escondas."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Cómo está armado el mazo" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>Cinco momentos. Ninguno te tira al agua en la carta uno.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>El mazo está ordenado. Arranca liviano, y para cuando llegan a lo que cuesta decir ya vienen en carrera. Nadie tiene que abrirse de golpe.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "footnote",
+      "label": "Nota al pie",
+      "default": "<p>Podés jugarlo de corrido en una noche o sacar una carta por semana y estirarlo un año. No hay forma equivocada.</p>"
+    },
+    { "type": "color", "id": "accent", "label": "Color de acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "nivel",
+      "name": "Nivel",
+      "settings": [
+        { "type": "text", "id": "numeral", "label": "Número romano", "default": "I" },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Reconocerse" },
+        { "type": "text", "id": "desc", "label": "Descripción", "default": "Para volver a mirar lo que ya no mirás." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DAD · Niveles",
+      "blocks": [
+        { "type": "nivel", "settings": { "numeral": "I", "name": "Reconocerse", "desc": "Para volver a mirar lo que ya no mirás." } },
+        { "type": "nivel", "settings": { "numeral": "II", "name": "Recordar", "desc": "Lo que pasó y todavía se cuenta." } },
+        { "type": "nivel", "settings": { "numeral": "III", "name": "Mirarse", "desc": "Cuando sobran las palabras." } },
+        { "type": "nivel", "settings": { "numeral": "IV", "name": "Decirlo", "desc": "Eso que nunca dijeron en voz alta." } },
+        { "type": "nivel", "settings": { "numeral": "V", "name": "Quedarse", "desc": "El final, que no es un final." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

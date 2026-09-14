@@ -1,0 +1,84 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-cartas color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }}; --dad-accent-hot: {{ section.settings.accent_hot }};"
+>
+  <div class="dad__wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad__eyebrow dad-reveal">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dad__h2 dad-reveal" style="margin-top: 14px;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </div>
+
+  <div class="dad__wrap">
+    <div class="dad-cartas__rail" role="list">
+      {%- for block in section.blocks -%}
+        <article
+          class="dad-carta{% if block.settings.hot %} dad-carta--hot{% endif %}"
+          role="listitem"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.tag != blank -%}
+            <p class="dad-carta__tag">{{ block.settings.tag | escape }}</p>
+          {%- endif -%}
+          <p class="dad-carta__text">{{ block.settings.text }}</p>
+          {%- if block.settings.foot != blank -%}
+            <p class="dad-carta__num">{{ block.settings.foot | escape }}</p>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+    <p class="dad-cartas__hint">Deslizá para ver más →</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Qué puede pasar",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Carrusel con forma de carta. Cuando tengas las fotos reales de las cartas hero, reemplazá estos textos por frases textuales del mazo: es el formato que mejor funciona en Reels."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Qué puede pasar" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>Nadie se acuerda de la carta. Se acuerdan de lo que salió después.</p>"
+    },
+    { "type": "color", "id": "accent", "label": "Acento", "default": "#a8523f" },
+    { "type": "color", "id": "accent_hot", "label": "Acento (+18)", "default": "#8e2a3f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "carta",
+      "name": "Carta",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Etiqueta", "default": "Reconocerse" },
+        { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Una respuesta que no esperabas.</p>" },
+        { "type": "text", "id": "foot", "label": "Pie" },
+        { "type": "checkbox", "id": "hot", "label": "Usar acento +18", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DAD · Qué puede pasar",
+      "blocks": [
+        { "type": "carta", "settings": { "tag": "Recordar", "text": "<p>Una historia de hace diez años que nunca te había contado.</p>", "foot": "Morite de amor" } },
+        { "type": "carta", "settings": { "tag": "Reconocerse", "text": "<p>Una discusión divertida que termina en apuesta.</p>", "foot": "Morite de amor" } },
+        { "type": "carta", "settings": { "tag": "Decirlo", "text": "<p>Algo que los dos pensaban y ninguno había dicho en voz alta.</p>", "foot": "Morite de amor" } },
+        { "type": "carta", "settings": { "tag": "Confesiones", "text": "<p>Una confesión que cambia cómo la mirás el resto de la noche.</p>", "foot": "Sin vueltas · +18", "hot": true } },
+        { "type": "carta", "settings": { "tag": "Las manos", "text": "<p>El momento en que dejan de leer las cartas.</p>", "foot": "Sin vueltas · +18", "hot": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

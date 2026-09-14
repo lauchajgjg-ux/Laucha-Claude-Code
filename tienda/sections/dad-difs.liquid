@@ -1,0 +1,70 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-difs color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+>
+  <div class="dad__wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad__eyebrow dad-reveal">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dad__h2 dad-reveal" style="margin-top: 14px;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="dad-difs__grid">
+      {%- for block in section.blocks -%}
+        <div class="dad-dif dad-reveal" {{ block.shopify_attributes }}>
+          <h3 class="dad-dif__title">{{ block.settings.title | escape }}</h3>
+          <p class="dad-dif__text">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Diferenciadores",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Solo ventajas que podés sostener. Si no está en la caja o en el mazo, no va acá."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Por qué este y no otro" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>Lo que hace que no sea un mazo de preguntas más.</p>"
+    },
+    { "type": "color", "id": "accent", "label": "Acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "dif",
+      "name": "Diferenciador",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DAD · Diferenciadores",
+      "blocks": [
+        { "type": "dif", "settings": { "title": "Está escrito en argentino", "text": "No es una traducción. Las cartas suenan como hablás vos, con tus modismos y tu humor. Es lo único que una marca importada no puede copiar." } },
+        { "type": "dif", "settings": { "title": "Tiene orden, no es una pila", "text": "Cinco niveles que suben solos. No arranca pidiéndote que te abras: te deja llegar." } },
+        { "type": "dif", "settings": { "title": "Una carta la escribís vos", "text": "Viene una carta sin laminar para escribir a mano. Escribí algo, metela en el mazo y que aparezca cuando aparezca." } },
+        { "type": "dif", "settings": { "title": "Cinco cartas tienen QR", "text": "Llevan a experiencias que solo existen ahí. No están impresas en ningún lado." } },
+        { "type": "dif", "settings": { "title": "No se termina en una noche", "text": "En Sin vueltas la última carta no se juega: se guarda, y la próxima vez arrancan de ahí. El mazo queda abierto." } },
+        { "type": "dif", "settings": { "title": "Se nota en la mano", "text": "Cartas de 350 g con laminado mate y caja con barniz sectorizado. Diseñado e impreso en Argentina." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-pasos-wrap color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+  id="dad-como-funciona"
+>
+  <div class="dad__wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad__eyebrow dad-reveal">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dad__h2 dad-reveal" style="margin-top: 14px;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="dad-pasos">
+      {%- for block in section.blocks -%}
+        <div class="dad-paso dad-reveal" {{ block.shopify_attributes }}>
+          <span class="dad-paso__num" aria-hidden="true"></span>
+          <h3 class="dad-paso__title">{{ block.settings.title | escape }}</h3>
+          <p class="dad-paso__text">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="dad-reveal" style="margin-top: 40px;">
+        <a class="dad-btn dad-btn--solid" href="{{ section.settings.cta_link | default: '#dad-productos' }}">
+          {{- section.settings.cta_label | escape -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Cómo se juega",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    { "type": "paragraph", "content": "Tres pasos, sin manual. Si hace falta explicarlo más, el producto está mal explicado." },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Cómo se juega" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>Sin manual, sin tablero, sin reglas que memorizar.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA", "default": "Elegir mi mazo" },
+    { "type": "url", "id": "cta_link", "label": "Link del CTA" },
+    { "type": "color", "id": "accent", "label": "Color de acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Abrís la caja" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Las reglas están impresas adentro. Se leen en veinte segundos." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DAD · Cómo se juega",
+      "blocks": [
+        { "type": "paso", "settings": { "title": "Sacan una carta", "text": "Por turnos. La carta dice qué hacer o qué contar. No hay que pensar de qué hablar." } },
+        { "type": "paso", "settings": { "title": "Se responde", "text": "En voz alta, sin corregir, sin apurar. El que sacó la carta elige si contesta o pasa." } },
+        { "type": "paso", "settings": { "title": "Sigue el otro", "text": "Y el mazo va subiendo solo. Cortan cuando quieren: la próxima arranca donde quedaron." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

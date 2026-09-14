@@ -1,0 +1,153 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-prods color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+  id="dad-productos"
+>
+  <div class="dad__wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad__eyebrow dad-reveal">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dad__h2 dad-reveal" style="margin-top: 14px;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="dad-prods__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign p = block.settings.product
+          assign accent = block.settings.accent | default: section.settings.accent
+        -%}
+        {%- if p != blank -%}
+          <article
+            class="dad-prod{% if block.settings.featured %} dad-prod--featured{% endif %}"
+            style="--dad-accent: {{ accent }};"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.flag != blank -%}
+              <p class="dad-prod__flag">{{ block.settings.flag | escape }}</p>
+            {%- endif -%}
+
+            <span class="dad-prod__media" aria-hidden="true">
+              {%- if p.featured_image -%}
+                <img
+                  src="{{ p.featured_image | image_url: width: 800 }}"
+                  srcset="{{ p.featured_image | image_url: width: 500 }} 500w, {{ p.featured_image | image_url: width: 800 }} 800w, {{ p.featured_image | image_url: width: 1100 }} 1100w"
+                  sizes="(min-width: 900px) 33vw, 100vw"
+                  alt=""
+                  width="{{ p.featured_image.width }}"
+                  height="{{ p.featured_image.height }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </span>
+
+            <div class="dad-prod__body">
+              {%- if block.settings.kicker != blank -%}
+                <p class="dad-prod__kicker">{{ block.settings.kicker | escape }}</p>
+              {%- endif -%}
+
+              <h3 class="dad__h3 dad-prod__name">
+                <a href="{{ p.url }}">{{ block.settings.title | default: p.title | escape }}</a>
+              </h3>
+
+              {%- if block.settings.desc != blank -%}
+                <p class="dad-prod__desc">{{ block.settings.desc | escape }}</p>
+              {%- endif -%}
+
+              <div class="dad-prod__price">
+                <ins>{{ p.price | money }}</ins>
+                {%- if p.compare_at_price > p.price -%}
+                  <del>{{ p.compare_at_price | money }}</del>
+                  {%- assign save = p.compare_at_price | minus: p.price -%}
+                  <span class="dad-prod__save">Ahorrás {{ save | money }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- if section.settings.cuotas > 1 -%}
+                {%- assign cuota = p.price | divided_by: section.settings.cuotas -%}
+                <p class="dad-prod__cuotas">
+                  {{ section.settings.cuotas }} cuotas de {{ cuota | money }}
+                </p>
+              {%- endif -%}
+
+              <a
+                class="dad-btn {% if block.settings.featured %}dad-btn--solid{% else %}dad-btn--ghost{% endif %} dad-btn--full"
+                href="{{ p.url }}"
+              >{{ block.settings.cta | default: 'Ver el mazo' | escape }}</a>
+            </div>
+          </article>
+        {%- elsif request.design_mode -%}
+          <article class="dad-prod" {{ block.shopify_attributes }}>
+            <div class="dad-prod__body">
+              <p class="dad-prod__desc">Elegí un producto para este bloque.</p>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.note != blank -%}
+      <p class="dad__body dad-reveal" style="margin-top: 26px;">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Productos",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Tres opciones con el combo marcado como destacado: el combo es el que sube el ticket. El precio tachado sale del 'Precio de comparación' del producto en Shopify."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Los mazos" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>Dos mazos. Dos noches distintas.</p>"
+    },
+    {
+      "type": "range",
+      "id": "cuotas",
+      "label": "Mostrar precio en cuotas",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "info": "0 = no mostrar. Poné el número de cuotas que realmente ofrecés."
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Nota",
+      "default": "<p>Todos los precios en pesos argentinos. Envíos a todo el país.</p>"
+    },
+    { "type": "color", "id": "accent", "label": "Acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "prod",
+      "name": "Producto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto" },
+        { "type": "text", "id": "kicker", "label": "Bajada", "default": "58 cartas · +16" },
+        { "type": "text", "id": "title", "label": "Título (si querés acortar el nombre)" },
+        { "type": "textarea", "id": "desc", "label": "Descripción corta" },
+        { "type": "text", "id": "flag", "label": "Etiqueta de esquina" },
+        { "type": "text", "id": "cta", "label": "Texto del botón", "default": "Ver el mazo" },
+        { "type": "checkbox", "id": "featured", "label": "Destacar", "default": false },
+        { "type": "color", "id": "accent", "label": "Acento propio" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "DAD · Productos" }]
+}
+{% endschema %}

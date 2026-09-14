@@ -1,0 +1,54 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+{%- if product != blank and product.available -%}
+  <div class="dad-sticky" data-dad-sticky aria-label="Compra rápida">
+    {%- if product.featured_image -%}
+      <img
+        class="dad-sticky__thumb"
+        src="{{ product.featured_image | image_url: width: 120 }}"
+        alt=""
+        width="42"
+        height="42"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    <div class="dad-sticky__info">
+      <span class="dad-sticky__name">{{ product.title | escape }}</span>
+      <span class="dad-sticky__price">
+        {{- product.selected_or_first_available_variant.price | money -}}
+        {%- if section.settings.cuotas > 1 -%}
+          {%- assign c = product.selected_or_first_available_variant.price | divided_by: section.settings.cuotas -%}
+          <span> · {{ section.settings.cuotas }}× {{ c | money }}</span>
+        {%- endif -%}
+      </span>
+    </div>
+
+    <button
+      type="button"
+      class="dad-btn dad-btn--solid"
+      data-dad-sticky-add
+      data-fallback-url="{{ product.url }}"
+    >
+      {{- section.settings.label | default: 'Agregar' | escape -}}
+    </button>
+  </div>
+
+  <script src="{{ 'dad-sticky.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DAD · Compra fija (mobile)",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Barra fija abajo en celular. Aparece al pasar el botón de compra. En escritorio no se muestra (Dawn ya deja la info pegada)."
+    },
+    { "type": "text", "id": "label", "label": "Texto del botón", "default": "Agregar" },
+    { "type": "range", "id": "cuotas", "label": "Mostrar cuotas", "min": 0, "max": 12, "step": 1, "default": 6 }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

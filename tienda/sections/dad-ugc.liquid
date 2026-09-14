@@ -1,0 +1,101 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Prueba social. IMPORTANTE: esta sección solo debe publicarse con testimonios
+  reales de clientes. No cargar frases inventadas — se nota, y quema la marca.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section
+    class="dad dad-ugc color-{{ section.settings.color_scheme }} gradient"
+    style="--dad-accent: {{ section.settings.accent }};"
+  >
+    <div class="dad__wrap">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dad__eyebrow dad-reveal">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dad__h2 dad-reveal" style="margin-top: 14px;">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="dad__wrap">
+      <div class="dad-ugc__rail" role="list">
+        {%- for block in section.blocks -%}
+          <figure class="dad-ugc__item" role="listitem" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                class="dad-ugc__img"
+                src="{{ block.settings.image | image_url: width: 700 }}"
+                srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 700 }} 700w"
+                sizes="(min-width: 750px) 340px, 80vw"
+                alt="{{ block.settings.image.alt | default: block.settings.name | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+
+            <blockquote class="dad-ugc__quote">{{ block.settings.quote }}</blockquote>
+
+            <figcaption class="dad-ugc__meta">
+              {%- if block.settings.avatar != blank -%}
+                <img
+                  class="dad-ugc__avatar"
+                  src="{{ block.settings.avatar | image_url: width: 90 }}"
+                  alt=""
+                  width="30"
+                  height="30"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              <span>{{ block.settings.name | escape }}{% if block.settings.meta != blank %} · {{ block.settings.meta | escape }}{% endif %}</span>
+            </figcaption>
+          </figure>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <section class="dad color-{{ section.settings.color_scheme }} gradient">
+    <div class="dad__wrap">
+      <p class="dad__body">
+        Sección de prueba social vacía. Agregá bloques con testimonios <strong>reales</strong>
+        (captura de WhatsApp, comentario de Instagram, reseña con foto). No la publiques con
+        texto inventado.
+      </p>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DAD · Prueba social",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Cargá solo testimonios reales. Uno bueno con foto rinde más que diez genéricos. Si todavía no tenés, dejá la sección vacía: no se muestra."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Lo que nos cuentan" },
+    { "type": "richtext", "id": "heading", "label": "Titular", "default": "<p>Parejas que ya lo jugaron.</p>" },
+    { "type": "color", "id": "accent", "label": "Acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "ugc",
+      "name": "Testimonio",
+      "settings": [
+        { "type": "richtext", "id": "quote", "label": "Testimonio (textual)" },
+        { "type": "text", "id": "name", "label": "Nombre" },
+        { "type": "text", "id": "meta", "label": "Dato (ciudad, tiempo juntos, etc.)" },
+        { "type": "image_picker", "id": "image", "label": "Foto del cliente con el producto" },
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "DAD · Prueba social" }]
+}
+{% endschema %}

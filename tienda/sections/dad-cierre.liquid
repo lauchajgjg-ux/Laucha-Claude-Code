@@ -1,0 +1,63 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="dad dad-cierre color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+>
+  <div class="dad__wrap dad__wrap--narrow">
+    <div class="dad-cierre__inner dad-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dad__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dad__h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="dad__lead">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="dad-btn dad-btn--solid" href="{{ section.settings.cta_link | default: '#dad-productos' }}">
+          {{- section.settings.cta_label | escape -}}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.foot != blank -%}
+        <p class="dad__body" style="font-size: 0.85rem;">{{ section.settings.foot }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Cierre",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    { "type": "paragraph", "content": "Último empujón. Repetí el motivo de compra, no el producto." },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "El próximo viernes" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>Todavía no sabés todo de mí.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Una caja sobre la mesa y una noche que no se parece a la anterior. Eso es todo lo que hace falta.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA", "default": "Elegir mi mazo" },
+    { "type": "url", "id": "cta_link", "label": "Link del CTA" },
+    {
+      "type": "richtext",
+      "id": "foot",
+      "label": "Nota al pie",
+      "default": "<p>Envíos a todo el país · Diseñado e impreso en Argentina</p>"
+    },
+    { "type": "color", "id": "accent", "label": "Acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-4" }
+  ],
+  "presets": [{ "name": "DAD · Cierre" }]
+}
+{% endschema %}

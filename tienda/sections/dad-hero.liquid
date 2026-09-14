@@ -1,0 +1,125 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign img = section.settings.image
+  assign img_m = section.settings.image_mobile | default: section.settings.image
+-%}
+
+<section
+  class="dad dad-hero dad--flush color-{{ section.settings.color_scheme }} gradient{% if section.settings.media_position == 'left' %} dad-hero--media-left{% endif %}"
+  style="--dad-accent: {{ section.settings.accent }};"
+>
+  <div class="dad-hero__grid">
+    <div class="dad-hero__copy">
+      <div class="dad-hero__copy-inner">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="dad__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        <h1 class="dad__h1">{{ section.settings.heading }}</h1>
+
+        {%- if section.settings.subheading != blank -%}
+          <p class="dad__lead">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+
+        <div class="dad-hero__actions">
+          {%- if section.settings.cta_label != blank -%}
+            <a
+              class="dad-btn dad-btn--solid"
+              href="{{ section.settings.cta_link | default: '#dad-productos' }}"
+            >{{ section.settings.cta_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.cta2_label != blank -%}
+            <a
+              class="dad-btn dad-btn--ghost"
+              href="{{ section.settings.cta2_link | default: '#dad-como-funciona' }}"
+            >{{ section.settings.cta2_label | escape }}</a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.reassure != blank -%}
+          <ul class="dad-hero__reassure">
+            {%- assign bits = section.settings.reassure | split: '|' -%}
+            {%- for bit in bits -%}
+              <li>{{ bit | strip | escape }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="dad-hero__media">
+      {%- if img != blank -%}
+        <img
+          src="{{ img | image_url: width: 1600 }}"
+          srcset="
+            {{ img | image_url: width: 600 }} 600w,
+            {{ img | image_url: width: 900 }} 900w,
+            {{ img | image_url: width: 1200 }} 1200w,
+            {{ img | image_url: width: 1600 }} 1600w
+          "
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt="{{ img.alt | default: section.settings.heading | strip_html | escape }}"
+          width="{{ img.width }}"
+          height="{{ img.height }}"
+          fetchpriority="high"
+          {% if img_m != img %}class="dad-hide-mobile"{% endif %}
+        >
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'dad-hero__placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Hero",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Primera pantalla. Tiene que responder en 3 segundos: qué es, para quién y por qué me importa."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Juegos de cartas para parejas · Hecho en Argentina" },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Titular",
+      "default": "<p>No es un juego de preguntas. Es un plan para esta noche.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "<p>Cartas que no te piden que hables de tus sentimientos: te piden que hagas algo. Cinco niveles que arrancan livianos y terminan donde ustedes decidan.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA principal", "default": "Elegir mi mazo" },
+    { "type": "url", "id": "cta_link", "label": "Link del CTA principal" },
+    { "type": "text", "id": "cta2_label", "label": "CTA secundario", "default": "Ver cómo se juega" },
+    { "type": "url", "id": "cta2_link", "label": "Link del CTA secundario" },
+    {
+      "type": "text",
+      "id": "reassure",
+      "label": "Señales de confianza (separadas por |)",
+      "info": "Editá esto para que coincida con tus envíos y medios de pago reales.",
+      "default": "Envíos a todo el país | Hasta 6 cuotas | Diseñado e impreso en Argentina"
+    },
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Posición de la imagen (escritorio)",
+      "options": [
+        { "value": "right", "label": "Derecha" },
+        { "value": "left", "label": "Izquierda" }
+      ],
+      "default": "right"
+    },
+    { "type": "color", "id": "accent", "label": "Color de acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "DAD · Hero" }]
+}
+{% endschema %}
