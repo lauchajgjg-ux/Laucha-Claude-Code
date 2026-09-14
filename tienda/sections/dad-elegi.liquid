@@ -1,0 +1,292 @@
+{{ 'dad.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .dad-elegi__form { display: grid; gap: 12px; margin-top: 32px; }
+
+  .dad-elegi__opt {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20px 66px 1fr;
+    gap: 14px;
+    align-items: center;
+    border: 1px solid var(--dad-line);
+    border-radius: 4px;
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.18s var(--dad-ease), background-color 0.18s var(--dad-ease);
+  }
+
+  .dad-elegi__opt:hover { border-color: rgba(var(--dad-ink), 0.42); }
+
+  .dad-elegi__opt:has(input:checked) {
+    border-color: var(--dad-accent);
+    box-shadow: inset 0 0 0 1px var(--dad-accent);
+    background: rgba(var(--dad-ink), 0.025);
+  }
+
+  .dad-elegi__opt:has(input:focus-visible) { outline: 2px solid rgb(var(--dad-ink)); outline-offset: 2px; }
+
+  .dad-elegi__opt--ribbon { margin-top: 16px; }
+
+  .dad-elegi__ribbon {
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+    transform: translateY(-100%);
+    background: rgb(var(--dad-ink));
+    color: rgb(var(--dad-paper));
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+  }
+
+  .dad-elegi__radio { width: 20px; height: 20px; margin: 0; accent-color: var(--dad-accent); }
+
+  .dad-elegi__thumb {
+    display: block;
+    width: 66px;
+    height: 66px;
+    object-fit: cover;
+    border-radius: 3px;
+    background: rgba(var(--dad-ink), 0.06);
+  }
+
+  .dad-elegi__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .dad-elegi__name { font-size: 1.75rem; font-weight: 600; line-height: 1.2; }
+  .dad-elegi__sub { font-size: 1.4rem; color: var(--dad-muted); }
+
+  .dad-elegi__price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 9px; margin-top: 3px; }
+  .dad-elegi__price ins { text-decoration: none; font-size: 1.85rem; font-weight: 600; }
+  .dad-elegi__price del { font-size: 1.45rem; color: rgba(var(--dad-ink), 0.45); }
+
+  .dad-elegi__save {
+    background: var(--dad-accent);
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 99px;
+  }
+
+  .dad-elegi__bullets { display: grid; gap: 3px; margin-top: 7px; }
+  .dad-elegi__bullets [role="listitem"] { font-size: 1.35rem; color: var(--dad-muted); display: flex; gap: 7px; }
+  .dad-elegi__bullets [role="listitem"]::before { content: "\2713"; color: var(--dad-accent); font-weight: 700; flex: none; }
+
+  .dad-elegi__opt--soldout { opacity: 0.5; cursor: not-allowed; }
+
+  .dad-elegi__cta { margin-top: 20px; }
+
+  .dad-elegi__note { font-size: 1.35rem; color: rgba(var(--dad-ink), 0.55); margin-top: 12px; text-align: center; }
+
+  @media screen and (min-width: 750px) {
+    .dad-elegi__opt { grid-template-columns: 20px 78px 1fr; padding: 18px 20px; }
+    .dad-elegi__thumb { width: 78px; height: 78px; }
+  }
+</style>
+
+{%- comment -%}
+  Selector de experiencia. Sin JavaScript: cada opción es un <input type="radio"
+  name="id"> con el ID de variante, dentro de un form que postea a /cart/add.
+  Si el JS del tema falla, sigue funcionando: el navegador postea el form y
+  redirige a /cart.
+
+  En una ficha de producto preselecciona el producto que se está viendo. Si
+  ninguna opción coincide (por ejemplo en la home), usa la marcada como
+  "Preseleccionada", y si tampoco hay, la primera disponible.
+{%- endcomment -%}
+
+{%- liquid
+  assign checked_id = blank
+
+  for block in section.blocks
+    assign bp = block.settings.product
+    if bp != blank and bp.available and bp.handle == product.handle
+      assign checked_id = bp.selected_or_first_available_variant.id
+    endif
+  endfor
+
+  if checked_id == blank
+    for block in section.blocks
+      assign bp = block.settings.product
+      if bp != blank and bp.available and block.settings.preselect and checked_id == blank
+        assign checked_id = bp.selected_or_first_available_variant.id
+      endif
+    endfor
+  endif
+
+  if checked_id == blank
+    for block in section.blocks
+      assign bp = block.settings.product
+      if bp != blank and bp.available and checked_id == blank
+        assign checked_id = bp.selected_or_first_available_variant.id
+      endif
+    endfor
+  endif
+-%}
+
+<section
+  class="dad dad-elegi color-{{ section.settings.color_scheme }} gradient"
+  style="--dad-accent: {{ section.settings.accent }};"
+  id="dad-elegi"
+>
+  <div class="dad__wrap dad__wrap--narrow">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dad__h2" style="margin-top: 12px;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="dad__lead" style="margin-top: 12px;">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if checked_id == blank -%}
+      {%- if request.design_mode -%}
+        <p class="dad__body" style="margin-top: 24px;">
+          Agregá bloques y elegí un producto en cada uno. Si no hay ninguno disponible,
+          esta sección no se muestra.
+        </p>
+      {%- endif -%}
+    {%- else -%}
+      <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="dad-elegi__form">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign bp = block.settings.product
+            assign v = bp.selected_or_first_available_variant
+          -%}
+          {%- if bp != blank -%}
+            <label
+              class="dad-elegi__opt{% if block.settings.ribbon != blank %} dad-elegi__opt--ribbon{% endif %}{% unless bp.available %} dad-elegi__opt--soldout{% endunless %}"
+              {% if block.settings.accent != blank %}style="--dad-accent: {{ block.settings.accent }};"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.ribbon != blank -%}
+                <span class="dad-elegi__ribbon">{{ block.settings.ribbon | escape }}</span>
+              {%- endif -%}
+
+              <input
+                class="dad-elegi__radio"
+                type="radio"
+                name="id"
+                value="{{ v.id }}"
+                {% if v.id == checked_id %}checked{% endif %}
+                {% unless bp.available %}disabled{% endunless %}
+              >
+
+              {%- if bp.featured_image -%}
+                <img
+                  class="dad-elegi__thumb"
+                  src="{{ bp.featured_image | image_url: width: 180 }}"
+                  alt=""
+                  width="78"
+                  height="78"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <span class="dad-elegi__thumb"></span>
+              {%- endif -%}
+
+              <span class="dad-elegi__body">
+                <span class="dad-elegi__name">{{ block.settings.title | default: bp.title | escape }}</span>
+
+                {%- if block.settings.sub != blank -%}
+                  <span class="dad-elegi__sub">{{ block.settings.sub | escape }}</span>
+                {%- endif -%}
+
+                <span class="dad-elegi__price">
+                  {%- if bp.available -%}
+                    <ins>{{ bp.price | money }}</ins>
+                    {%- if bp.compare_at_price > bp.price -%}
+                      <del>{{ bp.compare_at_price | money }}</del>
+                      {%- assign save = bp.compare_at_price | minus: bp.price -%}
+                      <span class="dad-elegi__save">Ahorrás {{ save | money }}</span>
+                    {%- endif -%}
+                  {%- else -%}
+                    <ins>Sin stock</ins>
+                  {%- endif -%}
+                </span>
+
+                {%- if block.settings.bullets != blank -%}
+                  {%- assign bullets = block.settings.bullets | strip | newline_to_br | split: '<br />' -%}
+                  <span class="dad-elegi__bullets" role="list">
+                    {%- for b in bullets -%}
+                      {%- assign bt = b | strip -%}
+                      {%- if bt != blank -%}
+                        <span role="listitem">{{ bt | escape }}</span>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </span>
+                {%- endif -%}
+              </span>
+            </label>
+          {%- endif -%}
+        {%- endfor -%}
+
+        <button type="submit" class="dad-btn dad-btn--solid dad-btn--full dad-elegi__cta">
+          {{- section.settings.cta_label | default: 'Agregar al carrito' | escape -}}
+        </button>
+
+        {%- if section.settings.note != blank -%}
+          <p class="dad-elegi__note">{{ section.settings.note | escape }}</p>
+        {%- endif -%}
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DAD · Elegí el mazo",
+  "tag": "section",
+  "class": "dad-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Selector de mazo o combo. En una ficha de producto preselecciona solo el que se está viendo. Funciona sin JavaScript: al enviar agrega al carrito la opción elegida."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Bajada superior", "default": "Elegí tu experiencia" },
+    { "type": "richtext", "id": "heading", "label": "Titular", "default": "<p>Un mazo, o los dos.</p>" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Los dos juntos salen menos que por separado, y cubren las dos noches que tiene una pareja.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Agregar al carrito" },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Nota bajo el botón",
+      "default": "Envío a todo el país por $5.555 fijos · Llega en 5 a 8 días hábiles"
+    },
+    { "type": "color", "id": "accent", "label": "Acento", "default": "#a8523f" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "opcion",
+      "name": "Opción",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Producto" },
+        { "type": "text", "id": "title", "label": "Título (si querés acortar el nombre)" },
+        { "type": "text", "id": "sub", "label": "Bajada", "default": "58 cartas · +16" },
+        { "type": "text", "id": "ribbon", "label": "Cinta superior", "info": "Dejalo vacío si no lleva." },
+        {
+          "type": "textarea",
+          "id": "bullets",
+          "label": "Viñetas",
+          "info": "Una por línea. Se muestran con un tilde."
+        },
+        { "type": "checkbox", "id": "preselect", "label": "Preseleccionada fuera de la ficha de producto", "default": false },
+        { "type": "color", "id": "accent", "label": "Acento propio" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "DAD · Elegí el mazo" }]
+}
+{% endschema %}
